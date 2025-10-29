@@ -1,0 +1,1006 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirco Aurelio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="img/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.0/lazysizes.min.js"></script>
+    <style>
+        @media (min-width: 992px) {
+            .modal-lg, .modal-xl {
+                max-width: 900px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .modal-lg, .modal-xl {
+                max-width: 1000px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .modal-lg, .modal-xl {
+                max-width: 1100px;
+            }
+        }
+
+        .btn:not(:disabled):not(.disabled) {
+            cursor: pointer;
+            color: black;
+            font-weight: 100;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        hr {
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+            border: 0;
+            border-top: 2px solid rgb(0 0 0 / 43%);
+        }
+
+        .carousel-caption {
+            color: black;
+        }
+
+        .carousel-item {
+            background: white;
+        }
+
+        .modal-body {
+            padding: 0rem;
+        }
+
+        .modal-content {
+            background: transparent;
+            border: 0;
+        }
+
+        .modal-header {
+            z-index: 200;
+            padding: 0;
+            border: transparent;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .modal-dialog {
+            /* Modal dialog styles */
+        }
+        
+        header {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .hero-header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+            .hero-header .hero-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+            }
+
+            .hero-header img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .photo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-top: 2rem;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+            .photo-item img {
+                width: 100%;
+                height: auto;
+            }
+
+        .product-flag {
+            position: absolute;
+            display: none;
+            top: 10px;
+            right: 10px;
+            padding: 0.25rem 0.5rem;
+            font-size: 14px;
+            font-weight: 100;
+            text-transform: uppercase;
+            color: #fff;
+            z-index: 2;
+        }
+
+
+            .product-flag.sold {
+                background-color: #ff5e5e;
+            }
+
+            .product-flag.available {
+                background-color: #8bc34a;
+            }
+
+        .carousel-control-next {
+            transform: translateX(100px);
+        }
+
+        .carousel-control-prev {
+            transform: translateX(-100px);
+        }
+
+        .carousel-caption {
+            position: initial;
+            padding: 20px;
+            padding-right: 35px;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0 15px;
+            width: calc(100% - 30px);
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+            .photo-overlay h4 {
+                font-size: 24px;
+                font-weight: 100;
+                margin: 0;
+                text-align: center;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .photo-overlay.active {
+                opacity: 1;
+            }
+
+        .navbar-light .navbar-toggler {
+            color: rgba(0,0,0,.5);
+            border-color: rgba(0,0,0,0);
+        }
+
+        .ml-nav {
+            margin-left: auto !important;
+        }
+
+        @media (min-width: 768px) {
+            .img-des {
+                line-height: 1rem;
+                margin-top: 10px
+            }
+        }
+
+        @media (max-width: 767px) {
+            .img-des {
+                margin-top: 2rem
+            }
+
+            .ml-nav {
+                margin-left: 15px !important;
+            }
+
+            .navbar-brand {
+                margin-left: 15px;
+            }
+
+            .product-flag {
+                display: none;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                padding: 0.25rem 0.5rem;
+                font-size: 9px;
+            }
+
+            .photo-grid {
+                display: block;
+            }
+
+            .photo-item {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+                .photo-item img {
+                    width: 100%;
+                    height: auto;
+                }
+
+            .photo-overlay {
+                font-size: 16px;
+            }
+
+            .modal-content {
+                padding: 10px;
+            }
+        }
+
+
+        #info {
+            background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @media screen and (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        .image-wrapper {
+            height: 100%;
+        }
+
+            .image-wrapper img {
+                object-fit: cover;
+            }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+
+        .card-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .card-text {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+                color: #FF8E53;
+                transition: all 0.3s ease;
+            }
+
+        /* Typography standardization */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline styles */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ddd;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #555;
+            }
+    </style>
+</head>
+
+<body class="" style="">
+
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light white fixed-top" style="background: white;">
+            <div class="container">
+                <a class="navbar-brand" href="#">Mirco Aurelio</a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarNav" style="">
+                    <ul class="navbar-nav ml-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sculptor-section">Sculptor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#vj-mapping-section">VJ Mapping</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#coder-section">Coder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact-section">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="hero-header">
+            <div class="hero-overlay"></div>
+            <img src="img/1.jpeg" class="img-fluid" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            <div class="container h-100 d-flex align-items-center justify-content-center">
+                <div class="text-center text-white">
+                    <h1>Mirco Aurelio</h1>
+                    <p>Sculptor • VJ Mapper • Coder</p>
+                    <p>Exploring the intersection of art, technology, and digital expression</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Sculptor Section -->
+    <section id="sculptor-section" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h1>Sculptor</h1>
+                    <p>Three-dimensional art that explores form, space, and materiality</p>
+                    </div>
+                </div>
+
+            <!-- Current Project -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6">
+                    <div class="photo-item">
+                    <div class="photo-overlay">
+                            <h4>Stage Design Project</h4>
+                    </div>
+                        <div class="placeholder-image" style="height: 400px; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); display: flex; align-items: center; justify-content: center; color: #666;">
+                            <div class="text-center">
+                                <i class="fas fa-cube" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <p>Stage Design Image</p>
+                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-description">
+                        <h4>Giant Hands & Face Stage Design</h4>
+                        <p>Currently working on a stage design composed of two giant hands and a face, both less than 2 meters in height, representing a 20-meter human figure. This monumental sculptural installation is being created for a psytrance festival in central Italy.</p>
+                        <p>The design creates an immersive environment where festival-goers can interact with these massive sculptural elements, transforming the stage into a living, breathing entity that responds to the music and energy of the event.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Works -->
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h4 class="text-center mb-4">Previous Works</h4>
+                    </div>
+                </div>
+            <div class="row photo-grid">
+                <div style="height: fit-content;" class=" col-12 col-sm-6 col-md-4 photo-item">
+                    <div class="photo-overlay">
+                        <h4>Sculpture 2</h4>
+                    </div>
+                    <img src="img/2.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;">
+                </div>
+
+                <div style="height: fit-content;" class=" col-12 col-sm-6 col-md-4 photo-item">
+                    <div class="photo-overlay">
+                        <h4>Sculpture 3</h4>
+                    </div>
+                    <img src="img/3.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;">
+                </div>
+                <div style="height: fit-content;" class=" col-12 col-sm-6 col-md-4 photo-item">
+                    <div class="photo-overlay">
+                        <h4>Sculpture 4</h4>
+            </div>
+                    <video src="img/4.mov" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" muted loop preload="metadata">
+                        <img src="img/2.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" alt="Video not supported">
+                    </video>
+                </div>
+                <div style="height: fit-content;" class=" col-12 col-sm-6 col-md-4 photo-item">
+                    <div class="photo-overlay">
+                        <h4>Sculpture 5</h4>
+                    </div>
+                    <img src="img/5.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;">
+                </div>
+                <div style="height: fit-content;" class=" col-12 col-sm-6 col-md-4 photo-item">
+                    <div class="photo-overlay">
+                        <h4>Sculpture 6</h4>
+                    </div>
+                    <img src="img/6.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VJ Mapping Section -->
+    <section id="vj-mapping-section" class="py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h1>VJ Mapping</h1>
+                    <p>Immersive visual experiences through projection mapping and live performance</p>
+        </div>
+                    </div>
+
+            <!-- Current Project -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6">
+                    <div class="photo-item">
+                        <div class="photo-overlay">
+                            <h4>Hands & Head Mapping</h4>
+                        </div>
+                        <div class="placeholder-image" style="height: 400px; background: linear-gradient(45deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white;">
+                            <div class="text-center">
+                                <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <p>VJ Mapping Video</p>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-description">
+                        <h4>Multi-Day Night Mapping Project</h4>
+                        <p>Creating the visual mapping for the hands and head of the giant stage design, realizing a multi-day night mapping experience. The visuals are synchronized to the beat of the music, with special attention to creating psychedelic, dreamy, and highly complex visual narratives.</p>
+                        <p>This project transforms the sculptural elements into dynamic canvases that respond to the music, creating an immersive visual journey that enhances the festival experience through intricate projection mapping techniques.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Works -->
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h4 class="text-center mb-4">Previous VJ Works</h4>
+                </div>
+            </div>
+            <div class="row photo-grid">
+                <div style="height: fit-content;" class="col-md-6 col-12 photo-item">
+                        <div class="photo-overlay">
+                        <h4>VJ Project 7</h4>
+                        </div>
+                                        <video src="img/7.mov" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" muted loop preload="metadata">
+                        <img src="img/2.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" alt="Video not supported">
+                    </video>
+                </div>
+                <div style="height: fit-content;" class="col-md-6 col-12 photo-item">
+                    <div class="photo-overlay">
+                        <h4>VJ Project 8</h4>
+                    </div>
+                    <video src="img/8.MOV" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" muted loop preload="metadata">
+                        <img src="img/2.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" alt="Video not supported">
+                    </video>
+                </div>
+                <div style="height: fit-content;" class="col-md-6 col-12 photo-item">
+                    <div class="photo-overlay">
+                        <h4>VJ Project 9</h4>
+                    </div>
+                    <video src="img/9.mov" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" muted loop preload="metadata">
+                        <img src="img/2.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" alt="Video not supported">
+                    </video>
+                </div>
+                <div style="height: fit-content;" class="col-md-6 col-12 photo-item">
+                    <div class="photo-overlay">
+                        <h4>VJ Project 10</h4>
+                    </div>
+                    <video src="img/10.mov" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" muted loop preload="metadata">
+                        <img src="img/2.jpg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" alt="Video not supported">
+                    </video>
+                </div>
+                <div style="height: fit-content;" class="col-md-12 col-12 photo-item">
+                    <div class="photo-overlay">
+                        <h4>VJ Project 11</h4>
+                    </div>
+                    <img src="img/11.jpeg" class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coder Section -->
+    <section id="coder-section" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h1>Coder</h1>
+                    <p>Creative coding, interactive installations, and digital art through programming</p>
+                    </div>
+                    </div>
+
+            <!-- Future Project -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6">
+                    <div class="photo-item">
+                        <div class="photo-overlay">
+                            <h4>Next-Gen Mapping Software</h4>
+                    </div>
+                        <div class="placeholder-image" style="height: 400px; background: linear-gradient(45deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white;">
+                            <div class="text-center">
+                                <i class="fas fa-code" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <p>Software Development</p>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-description">
+                        <h4>Next-Generation Mapping Software (2026)</h4>
+                        <p>Building the next generation software for mapping, uniting AI, mapping, and content production beyond just projection utility. This is a major project that will launch in 2026 and will be a direct competitor to Mad Mapper and Resolume Arena.</p>
+                        <p>The software will revolutionize the VJ mapping industry by integrating artificial intelligence capabilities with advanced projection mapping tools, creating a comprehensive platform for both content creation and live performance.</p>
+                    </div>
+                    </div>
+                    </div>
+
+            <!-- Professional Experience -->
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h4 class="text-center mb-4">Professional Experience</h4>
+                    </div>
+                    </div>
+            
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023 - Present</div>
+                            <div class="timeline-title">Mondadori - AI Software Developer</div>
+                            <div class="timeline-description">Working for the non-profit division as an AI software developer, contributing to innovative solutions that combine artificial intelligence with content creation and publishing technologies.</div>
+                    </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-title">Philum Startup - Textile Design Software</div>
+                            <div class="timeline-description">Developed software for Jacquard textile design - essentially creating a Photoshop-like tool specifically for Jacquard textile design, powered by AI technology to revolutionize traditional textile design processes.</div>
+                </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">2017 - 2022</div>
+                            <div class="timeline-title">OEDS AI Company</div>
+                            <div class="timeline-description">Contributed to cutting-edge AI development, working on innovative solutions that combine artificial intelligence with creative applications and advanced technological implementations.</div>
+                    </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date"> Present</div>
+                            <div class="timeline-title">Creative Coding Projects</div>
+                            <div class="timeline-description">Various creative coding projects including interactive installations, generative art, and custom VJ mapping software development that bridges the gap between artistic vision and technical implementation.</div>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="info-section" class="container py-5">
+        <div><hr /></div>
+        <div class="text-center">
+            <h1>About Mirco Aurelio</h1>
+            <p>
+                Mirco Aurelio is a multidisciplinary artist who explores the intersection of traditional craftsmanship and cutting-edge technology. As a sculptor, he creates three-dimensional works that challenge perceptions of form and space. His VJ mapping projects transform architectural surfaces into dynamic canvases for immersive visual experiences. Through creative coding, he develops interactive installations that bridge the gap between digital and physical realms.
+            </p>
+            <p>
+                His work represents a unique fusion of artistic disciplines, where traditional sculptural techniques meet modern digital tools. Each project is an exploration of how technology can enhance and expand the possibilities of artistic expression, creating experiences that engage audiences on multiple sensory levels.
+            </p>
+            <p>
+                Mirco's approach combines technical precision with creative vision, resulting in works that are both conceptually rich and visually striking. His portfolio spans from intimate sculptural pieces to large-scale projection mapping installations, each piece reflecting his commitment to pushing the boundaries of contemporary art.
+            </p>
+        </div>
+    </section>
+
+
+
+
+
+
+    <div style="height: 50px;"></div>
+    <section id="contact-section" style="background:white;" class="container py-5">
+        <div><hr /></div>
+        <div class="text-center">
+            <h1>Contact</h1>
+                        <div class="mt-4">
+                <p>
+                    <a href="tel:+393930271131" style="color: black; text-decoration: none;" class="me-4">
+                        <i class="fas fa-phone me-2"></i>+39 393 027 1131
+                        </a>
+                    </p>
+                    <p>
+                    <a href="mailto:mirco.aurelio@example.com" style="color: black; text-decoration: none;" class="me-4">
+                        <i class="fas fa-envelope me-2"></i>mirco.aurelio@example.com
+                        </a>
+                    </p>
+                    <p>
+                    <a href="https://www.instagram.com/mirco.aurelio/" style="color: black; text-decoration: none;" class="me-4">
+                        <i class="fab fa-instagram me-2"></i>@mirco.aurelio
+                    </a>
+                </p>
+                <p>
+                    <a href="https://github.com/mircoaurelio" style="color: black; text-decoration: none;" class="me-4">
+                        <i class="fab fa-github me-2"></i>github.com/mircoaurelio
+                        </a>
+                    </p>
+            </div>
+        </div>
+        <div style="height: 80px;"></div>
+    </section>
+
+
+    <footer style="display: block; border-top: 1px solid lightgrey">
+        <div class="container">
+            <p style="margin: 7px; text-align: center;">
+                <a href="https://www.instagram.com/mirco.aurelio/" style="color:lightgrey" class="card-text"><i class="fab fa-instagram me-2"></i>@mirco.aurelio</a>
+            </p>
+        </div>
+    </footer>
+
+
+
+
+
+
+    <div id="photo-modal" class="modal fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button style="color: white; opacity: 0.99;" type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    <div id="carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(window).on("load", function () {
+            var $spinner = $("<div>").addClass("spinner-border text-primary");
+            var $loader = $("<div>").addClass("loader").append($spinner);
+            $("body").prepend($loader);
+
+            var $images = $("img");
+            var $videos = $("video");
+            var totalMedia = $images.length + $videos.length;
+            var loaded = 0;
+            var timeoutId;
+
+            function checkAllLoaded() {
+                if (loaded >= totalMedia) {
+                    $spinner.css("opacity", 0);
+                    setTimeout(function () {
+                        $loader.remove();
+                    }, 500);
+                }
+            }
+            
+            // Set a maximum timeout to prevent infinite loading
+            timeoutId = setTimeout(function() {
+                $spinner.css("opacity", 0);
+                setTimeout(function () {
+                    $loader.remove();
+                }, 500);
+            }, 5000); // 5 second timeout
+            
+            $images.on("load error", function () {
+                loaded++;
+                checkAllLoaded();
+            }).each(function () {
+                if (this.complete) $(this).trigger("load");
+            });
+            
+            $videos.on("loadeddata error", function () {
+                loaded++;
+                checkAllLoaded();
+            }).each(function () {
+                if (this.readyState >= 2) $(this).trigger("loadeddata");
+            });
+            
+            // Clear timeout if everything loads successfully
+            function clearTimeoutIfLoaded() {
+                if (loaded >= totalMedia) {
+                    clearTimeout(timeoutId);
+                }
+            }
+            
+            // Check periodically
+            var checkInterval = setInterval(function() {
+                clearTimeoutIfLoaded();
+                if (loaded >= totalMedia) {
+                    clearInterval(checkInterval);
+                }
+            }, 100);
+        });
+
+        $(document).ready(function () {
+
+            $('img').each(function () {
+                var filename = $(this).attr('src').split('/').pop().replace('.jpg', '').replace(/_/g, ' ');
+                var productFlag = $(this).siblings('.product-flag');
+                if (filename.indexOf('[SOLD]') !== -1 && productFlag.hasClass('available')) {
+                    productFlag.removeClass('available').addClass('sold').text('Sold');
+                }
+
+                filename = filename.replace('[SOLD]', '');
+                filename = filename.charAt(0).toUpperCase() + filename.slice(1);
+
+
+                $(this).siblings('.photo-overlay').children('h4').text(filename);
+
+            });
+
+            var maxHeight = 0;
+            $('.image-wrapper').each(function () {
+                if ($(this).height() > maxHeight) {
+                    maxHeight = $(this).height();
+                }
+            });
+            $('.image-wrapper').height(maxHeight);
+            // Store all media items for modal
+            var allMediaItems = [];
+            
+            // Collect all media items on page load
+            $('.photo-item').each(function(index) {
+                var $img = $(this).find('img');
+                var $video = $(this).find('video');
+                
+                if ($img.length > 0 && $img.attr('src')) {
+                    allMediaItems.push({
+                        type: 'image',
+                        src: $img.attr('src'),
+                        element: this,
+                        title: $(this).find('.photo-overlay h4').text(),
+                        index: index
+                    });
+                    console.log('Added image:', $img.attr('src'), 'at index:', allMediaItems.length - 1);
+                } else if ($video.length > 0 && $video.attr('src')) {
+                    allMediaItems.push({
+                        type: 'video',
+                        src: $video.attr('src'),
+                        element: this,
+                        title: $(this).find('.photo-overlay h4').text(),
+                        index: index
+                    });
+                    console.log('Added video:', $video.attr('src'), 'at index:', allMediaItems.length - 1);
+                }
+            });
+            
+            console.log('Total media items collected:', allMediaItems.length);
+            
+            // Click handler for media items
+            $('.photo-item').on('click', function () {
+                var clickedElement = this;
+                var clickedIndex = -1;
+                
+                // Find the index of clicked item
+                for (var i = 0; i < allMediaItems.length; i++) {
+                    if (allMediaItems[i].element === clickedElement) {
+                        clickedIndex = i;
+                        break;
+                    }
+                }
+                
+                console.log('Clicked element:', clickedElement);
+                console.log('Found index:', clickedIndex);
+                console.log('Total media items:', allMediaItems.length);
+                
+                if (clickedIndex === -1) {
+                    console.log('Could not find clicked element in media items');
+                    return;
+                }
+                
+                // Clear existing carousel items
+                $('#carousel .carousel-inner').empty();
+                
+                // Build carousel items with proper Bootstrap structure
+                for (var i = 0; i < allMediaItems.length; i++) {
+                    var mediaItem = allMediaItems[i];
+                    var $carouselItem = $('<div class="carousel-item"></div>');
+                    
+                    if (mediaItem.type === 'image') {
+                        $carouselItem.html('<img src="' + mediaItem.src + '" class="d-block w-100" style="height: 80vh; object-fit: contain;">');
+                    } else if (mediaItem.type === 'video') {
+                        $carouselItem.html('<video src="' + mediaItem.src + '" class="d-block w-100" style="height: 80vh; object-fit: contain;" controls loop></video>');
+                    }
+                    
+                    $('#carousel .carousel-inner').append($carouselItem);
+                }
+                
+                // Set the active item
+                $('#carousel .carousel-item').eq(clickedIndex).addClass('active');
+                
+                console.log('Active item set to index:', clickedIndex);
+                console.log('Active item type:', allMediaItems[clickedIndex].type);
+                console.log('Active item src:', allMediaItems[clickedIndex].src);
+                
+                // Show modal
+                $('#photo-modal').modal('show');
+                
+                // Auto-play video if clicked item is a video
+                setTimeout(function() {
+                    var $activeVideo = $('#carousel .carousel-item.active video');
+                    console.log('Active video found:', $activeVideo.length);
+                    if ($activeVideo.length > 0) {
+                        console.log('Playing video:', $activeVideo[0].src);
+                        $activeVideo[0].play().catch(function(error) {
+                            console.log('Video autoplay failed:', error);
+                        });
+                    }
+                }, 500);
+            });
+
+            $('.photo-item').on('mouseenter', function () {
+                $(this).find('.photo-overlay').addClass('active');
+            });
+
+            $('.photo-item').on('mouseleave', function () {
+                $(this).find('.photo-overlay').removeClass('active');
+            });
+
+            // Pause all videos when modal is closed
+            $('#photo-modal').on('hidden.bs.modal', function () {
+                $('#carousel video').each(function() {
+                    this.pause();
+                });
+            });
+
+            // Handle carousel navigation with proper Bootstrap events
+            $('#carousel').on('slide.bs.carousel', function (e) {
+                // Pause all videos when sliding
+                $('#carousel video').each(function() {
+                    this.pause();
+                });
+            });
+
+            $('#carousel').on('slid.bs.carousel', function (e) {
+                // Play the active video after slide completes
+                var $activeVideo = $('#carousel .carousel-item.active video');
+                if ($activeVideo.length > 0) {
+                    $activeVideo[0].play().catch(function(error) {
+                        console.log('Video autoplay failed:', error);
+                    });
+                }
+            });
+
+            // Initialize carousel after modal is shown
+            $('#photo-modal').on('shown.bs.modal', function () {
+                // Reinitialize the carousel to ensure proper Bootstrap functionality
+                $('#carousel').carousel('dispose').carousel({
+                    interval: false,
+                    wrap: true
+                });
+            });
+
+            // Ensure videos in gallery are clickable
+            $('video').on('click', function(e) {
+                e.stopPropagation();
+                $(this).closest('.photo-item').trigger('click');
+            });
+
+            // Pause all videos when modal is closed
+            $('#photo-modal').on('hidden.bs.modal', function () {
+                $('#carousel video').each(function() {
+                    this.pause();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
